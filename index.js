@@ -38,7 +38,7 @@ const server = http.createServer((req, res) => {
 																								        <body>
 																									    <div class="box">
 																									          <h1>🚀 LIVE from AWS App Runner</h1>
-																										        <p>Deployed via GitHub Actions</p>
+																										        <p>Deployed via GitHub Actions and App runner</p>
 																											      <p>${new Date().toLocaleString()}</p>
 																											          </div>
 																												    </body>
