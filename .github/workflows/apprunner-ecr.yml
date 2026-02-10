@@ -27,6 +27,6 @@ jobs:
         run: |
           docker build -t apprunner-node-app .
           docker tag apprunner-node-app:latest \
-            243017877199.dkr.ecr.ap-south-1.amazonaws.com/apprunner-node-app:latest
+            243017877199.dkr.ecr.ap-south-1.amazonaws.com/apprunner_repo:latest
           docker push \
-            243017877199.dkr.ecr.ap-south-1.amazonaws.com/apprunner-node-app:latest
+            243017877199.dkr.ecr.ap-south-1.amazonaws.com/apprunner_repo:latest
