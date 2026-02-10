@@ -1,0 +1,39 @@
+name: Build and Push Docker Image to ECR
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write   # REQUIRED for OIDC
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::243017877199:role/GitHubOIDC-ECR-Role
+          aws-region: ap-south-1
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t apprunner-node-app .
+
+      - name: Tag and push Docker image to ECR
+        run: |
+          docker tag apprunner-node-app:latest \
+            243017877199.dkr.ecr.ap-south-1.amazonaws.com/apprunner-node-app:latest
+
+          docker push \
+            243017877199.dkr.ecr.ap-south-1.amazonaws.com/apprunner-node-app:latest
